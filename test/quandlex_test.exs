@@ -2,7 +2,8 @@ defmodule QuandlexTest do
   use ExUnit.Case
   doctest Quandlex
 
-  test "greets the world" do
-    assert Quandlex.hello() == :world
+  test "get timeseries" do
+    assert %{"dataset_data" => %{"data" => _, "start_date" => _}} =
+             Quandlex.Client.timeseries("BOE", "XUDLJYS", "json")
   end
 end
