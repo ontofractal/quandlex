@@ -12,20 +12,6 @@ defmodule Quandlex.Forex do
     Quandlex.Client.timeseries(source, symbol)
   end
 
-
-  def generate_symbol(from, to, source: "BOE") do
-    case {from, to} do
-      {"AUD", "USD"} -> "XUDLADD"
-      {"AUD", "GBP"} -> "XUDLADS"
-      {"CAD", "USD"} -> "XUDLCDD"
-      {"CAD", "GBP"} -> "XUDLCDS"
-      {"HKD", "USD"} -> "XUDLHDD"
-      {"HKD", "GBP"} -> "XUDLHDS"
-      {"SGD", "USD"} -> "XUDLSGD"
-      {"SGD", "GBP"} -> "XUDLSGS"
-    end
-  end
-
   def generate_symbol(from, to, source: "FRED") do
     case {from, to} do
       {"AUD", "USD"} -> "DEXUSAL"
@@ -89,6 +75,82 @@ defmodule Quandlex.Forex do
       {"TRY", "EUR"} -> "EURTRY"
       {"USD", "EUR"} -> "EURUSD"
       {"ZAR", "EUR"} -> "EURZAR"
+    end
+  end
+
+  def generate_symbol(from, to, source: "BOE") do
+    case to do
+      "USD" ->
+        case from do
+          "AUD" -> "XUDLADD"
+          "CAD" -> "XUDLCDD"
+          "CNY" -> "XUDLBK73"
+          "CZK" -> "XUDLBK27"
+          "DKK" -> "XUDLDKD"
+          "HKD" -> "XUDLHDD"
+          "HUF" -> "XUDLBK35"
+          "INR" -> "XUDLBK64"
+          "NIS" -> "XUDLBK65"
+          "JPY" -> "XUDLJYD"
+          "LTL" -> "XUDLBK38"
+          "MYR" -> "XUDLBK66"
+          "NZD" -> "XUDLNDD"
+          "NOK" -> "XUDLNKD"
+          "PLN" -> "XUDLBK49"
+          "GBP" -> "XUDLGBD"
+          "RUB" -> "XUDLBK69"
+          "SAR" -> "XUDLSRD"
+          "SGD" -> "XUDLSGD"
+          "ZAR" -> "XUDLZRD"
+          "KRW" -> "XUDLBK74"
+          "SEK" -> "XUDLSKD"
+          "CHF" -> "XUDLSFD"
+          "TWD" -> "XUDLTWD"
+          "THB" -> "XUDLBK72"
+          "TRY" -> "XUDLBK75"
+        end
+
+      "GBP" ->
+        case from do
+          "AUD" -> "XUDLADS"
+          "CAD" -> "XUDLCDS"
+          "CNY" -> "XUDLBK89"
+          "CZK" -> "XUDLBK25"
+          "DKK" -> "XUDLDKS"
+          "HKD" -> "XUDLHDS"
+          "HUF" -> "XUDLBK33"
+          "INR" -> "XUDLBK97"
+          "NIS" -> "XUDLBK78"
+          "JPY" -> "XUDLJYS"
+          "LTL" -> "XUDLBK36"
+          "MYR" -> "XUDLBK83"
+          "NZD" -> "XUDLNDS"
+          "NOK" -> "XUDLNKS"
+          "PLN" -> "XUDLBK47"
+          "GBP" -> "XUDLGBG"
+          "RUB" -> "XUDLBK85"
+          "SAR" -> "XUDLSRS"
+          "SGD" -> "XUDLSGS"
+          "ZAR" -> "XUDLZRS"
+          "KRW" -> "XUDLBK93"
+          "SEK" -> "XUDLSKS"
+          "CHF" -> "XUDLSFS"
+          "TWD" -> "XUDLTWS"
+          "THB" -> "XUDLBK87"
+          "TRY" -> "XUDLBK95"
+        end
+
+      "EUR" ->
+        case from do
+          "CZK" -> "XUDLBK26"
+          "DKK" -> "XUDLBK76"
+          "HUF" -> "XUDLBK34"
+          "JPY" -> "XUDLBK63"
+          "LTL" -> "XUDLBK37"
+          "PLN" -> "XUDLBK48"
+          "GBP" -> "XUDLSER"
+          "CHF" -> "XUDLBK68"
+        end
     end
   end
 end
