@@ -3,7 +3,7 @@ defmodule QuandlexTest do
   doctest Quandlex
 
   test "get timeseries" do
-    assert %{"dataset_data" => %{"data" => _, "start_date" => _}} =
+    assert %{"dataset_data" => %{"data" => data, "start_date" => _}} =
              Quandlex.Client.timeseries("BOE", "XUDLJYS", "json")
   end
 end
