@@ -3,8 +3,8 @@ defmodule Quandlex.Forex do
   Utility module to query historical data for foreign exchange rates using Quandl free APIs
   """
 
-  def get_all_daily(from, to, opts = [source: source = "BOE"]) do
-    symbol = generate_symbol(from,to, opts)
+  def get_all_daily(from, to, opts = [source: source]) do
+    symbol = generate_symbol(from, to, opts)
     Quandlex.Client.timeseries(source, symbol)
   end
 
@@ -12,13 +12,10 @@ defmodule Quandlex.Forex do
     case {from, to} do
       {"AUD", "USD"} -> "XUDLADD"
       {"AUD", "GBP"} -> "XUDLADS"
-
       {"CAD", "USD"} -> "XUDLCDD"
       {"CAD", "GBP"} -> "XUDLCDS"
-
       {"HKD", "USD"} -> "XUDLHDD"
       {"HKD", "GBP"} -> "XUDLHDS"
-
       {"SGD", "USD"} -> "XUDLSGD"
       {"SGD", "GBP"} -> "XUDLSGS"
     end
@@ -51,5 +48,4 @@ defmodule Quandlex.Forex do
       {"VEF", "USD"} -> "DEXVZUS"
     end
   end
-
 end
