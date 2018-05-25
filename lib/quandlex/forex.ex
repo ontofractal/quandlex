@@ -3,6 +3,9 @@ defmodule Quandlex.Forex do
   Utility module to query historical data for foreign exchange rates using Quandl free APIs
   """
 
+  def all(from, "USD"), do: get_all_daily(from, "USD", source: "FRED")
+  def all(from, "EUR"), do: get_all_daily(from, "EUR", source: "ECB")
+  def all(from, "GBP"), do: get_all_daily(from, "GBP", source: "BOE")
 
   def get_all_daily(from, to, opts = [source: source]) do
     symbol = generate_symbol(from, to, opts)
