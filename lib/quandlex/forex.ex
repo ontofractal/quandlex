@@ -24,4 +24,32 @@ defmodule Quandlex.Forex do
     end
   end
 
+  def generate_symbol(from, to, source: "FRED") do
+    case {from, to} do
+      {"AUD", "USD"} -> "DEXUSAL"
+      {"BRL", "USD"} -> "DEXBZUS"
+      {"GBP", "USD"} -> "DEXUSUK"
+      {"CAD", "USD"} -> "DEXCAUS"
+      {"CNY", "USD"} -> "DEXCHUS"
+      {"DKK", "USD"} -> "DEXDNUS"
+      {"EUR", "USD"} -> "DEXUSEU"
+      {"HKD", "USD"} -> "DEXHKUS"
+      {"INR", "USD"} -> "DEXINUS"
+      {"JPY", "USD"} -> "DEXJPUS"
+      {"MYR", "USD"} -> "DEXMAUS"
+      {"MXN", "USD"} -> "DEXMXUS"
+      {"TWD", "USD"} -> "DEXTAUS"
+      {"NZD", "USD"} -> "DEXUSNZ"
+      {"NOK", "USD"} -> "DEXNOUS"
+      {"SGD", "USD"} -> "DEXSIUS"
+      {"ZAR", "USD"} -> "DEXSFUS"
+      {"KRW", "USD"} -> "DEXKOUS"
+      {"LKR", "USD"} -> "DEXSLUS"
+      {"SEK", "USD"} -> "DEXSDUS"
+      {"CHF", "USD"} -> "DEXSZUS"
+      {"THB", "USD"} -> "DEXTHUS"
+      {"VEF", "USD"} -> "DEXVZUS"
+    end
+  end
+
 end
