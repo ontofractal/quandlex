@@ -2,6 +2,7 @@ defmodule Quandlex.Forex do
   @moduledoc """
   Utility module to query historical data for foreign exchange rates using Quandl free APIs
   """
+  defdelegate symbols_for(dataset_code, to_currency), to: Quandlex.Forex.Pairs
 
   def all(from, "USD"), do: get_all_daily(from, "USD", source: "FRED")
   def all(from, "EUR"), do: get_all_daily(from, "EUR", source: "ECB")
