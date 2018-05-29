@@ -8,12 +8,12 @@ defmodule QuandlexTest do
   end
 
   test "get timeseries with metadata" do
-    assert %{"dataset_data" => %{"data" => data, "start_date" => _}} =
+    assert %{"dataset" => %{"column_names" => _, "dataset_code" => _}} =
              Quandlex.Client.timeseries("BOE", "XUDLJYS", metadata: true)
   end
 
   test "get database metadata" do
-    assert %{"dataset_data" => %{"data" => data, "start_date" => _}} =
+    assert %{"database" => %{"database_code" => data, "id" => _}} =
              Quandlex.Client.timeseries("BOE", "XUDLJYS", metadata: :database)
   end
 end
