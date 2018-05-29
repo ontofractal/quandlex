@@ -3,16 +3,4 @@ defmodule Quandlex do
   Documentation for Quandlex.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Quandlex.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end

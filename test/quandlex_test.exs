@@ -1,6 +1,6 @@
-defmodule QuandlexTest do
+defmodule Quandlex.TimeseriesTest do
   use ExUnit.Case
-  doctest Quandlex
+  doctest Quandlex.Timeseries
 
   test "get timeseries" do
     assert {:ok, %{data: data, start_date: _}} =
