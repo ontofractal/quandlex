@@ -20,7 +20,7 @@ defmodule Quandlex.Client do
 
   def call(url) do
     with {:ok, tesla_env} <- get(url) do
-      tesla_env.body
+      {:ok, tesla_env.body}
     else
       err -> err
     end
