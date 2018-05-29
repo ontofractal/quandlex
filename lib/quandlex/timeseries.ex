@@ -18,9 +18,11 @@ defmodule Quandlex.Timeseries do
 
   def call(url, field_to_unwrap) do
     with {:ok, tesla_env} <- get(url),
+         nil <- tesla_env.body["quandl_error"],
          response <- tesla_env.body[field_to_unwrap] do
       {:ok, response}
     else
+      err when is_map(err) -> {:error, err}
       err -> err
     end
   end
