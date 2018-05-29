@@ -36,10 +36,28 @@ defmodule Quandlex.Timeseries do
          nil <- tesla_env.body["quandl_error"],
          response <- tesla_env.body[field_to_unwrap] do
       response = AtomicMap.convert(response, %{safe: false})
+
+      response =
+        if field_to_unwrap == "dataset_data" do
+          parse_data(response)
+        else
+          response
+        end
+
       {:ok, response}
     else
       err when is_map(err) -> {:error, err}
       err -> err
+    end
+  end
+
+  defp parse_data(response) do
+    case response.frequency do
+      "daily" ->
+        for [x | xs] <- response.data, do: [Date.from_iso8601!(x) | xs]
+
+      _ ->
+        for [x | xs] <- response.data, do: [NaiveDateTime.from_iso8601!(x) | xs]
     end
   end
 end
