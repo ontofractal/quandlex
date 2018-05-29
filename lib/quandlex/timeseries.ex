@@ -30,7 +30,9 @@ defmodule Quandlex.Timeseries do
         query
       end
 
-    with {:ok, tesla_env} <- get(url, Enum.into(query, Keyword.new())),
+    query_list = Enum.into(query, Keyword.new())
+
+    with {:ok, tesla_env} <- get(url, query: query_list),
          nil <- tesla_env.body["quandl_error"],
          response <- tesla_env.body[field_to_unwrap] do
       {:ok, response}
