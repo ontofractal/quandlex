@@ -35,6 +35,7 @@ defmodule Quandlex.Timeseries do
     with {:ok, tesla_env} <- get(url, query: query_list),
          nil <- tesla_env.body["quandl_error"],
          response <- tesla_env.body[field_to_unwrap] do
+      response = AtomicMap.convert(response, %{safe: false})
       {:ok, response}
     else
       err when is_map(err) -> {:error, err}
