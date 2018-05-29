@@ -10,7 +10,7 @@ defmodule Quandlex.Forex do
 
   def get_all_daily(from, to, opts = [source: source]) do
     symbol = generate_symbol(from, to, opts)
-    Quandlex.Client.timeseries(source, symbol)
+    Quandlex.Timeseries.get_data(source, symbol)
   end
 
   def generate_symbol(from, to, source: "FRED") do
