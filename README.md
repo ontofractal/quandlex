@@ -3,7 +3,38 @@
 An Elixir/Erlang library for Quandl API. Provides easy access to various databases and dataset for financial and market timeseries.
 
 
+## Installation
+
+The package can be installed by adding `quandlex` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:quandlex, "~> 0.1.0"}
+  ]
+end
+```
+
+Documentation including usage examples and return values can be found on [hexdocs](https://hexdocs.pm/quandlex)
+
 ## Quandlex.Timeseries
+
+Quandlex.Timeseries includes several functions that match API endpoints:
+
+* `get_data`: returns both data and dataset metadata
+* `get_dataset_metadata`: returns only dataset metadata
+* `get_database_metadata`: returns database metadata
+
+```
+iex> {:ok, %{data: data, type: type}} = Quandlex.Timeseries.get_data("CHRIS", "MGEX_IH1")
+iex> is_list(hd(data)) and is_list(data) and type == "Time Series"
+true
+
+iex> {:ok, %{name: name, id: id}} = Quandlex.Timeseries.get_database_metadata("CHRIS")
+iex> name == "Wiki Continuous Futures" and id == 596
+true
+```
+
 
 ## Quandlex.Forex
 
@@ -35,24 +66,8 @@ true
 ```
 
 
-
-
 ## Roadmap
 
-
-
-## Installation
-
-The package can be installed by adding `quandlex` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:quandlex, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/quandlex](https://hexdocs.pm/quandlex).
+* [ ] Add datatables module
+* [ ] Add structs for return values
+* [ ] Investigate developer experience improvements using rate limiting utilities and caching
