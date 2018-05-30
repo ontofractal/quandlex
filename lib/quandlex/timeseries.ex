@@ -59,12 +59,12 @@ defmodule Quandlex.Timeseries do
   end
 
   @doc ~S"""
-  Returns data from a specified time-series.
+  Returns metadata for a specified time-series database.
 
   ## Examples
 
-      iex> {:ok, %{data: data, type: type}} = Quandlex.Timeseries.get_database_metadata("CHRIS", "MGEX_IH1")
-      iex> is_list(hd(data)) and is_list(data) and type == "Time Series"
+      iex> {:ok, %{name: name, id: id}} = Quandlex.Timeseries.get_database_metadata("CHRIS")
+      iex> name == "Wiki Continuous Futures" and id == 596
       true
 
 
