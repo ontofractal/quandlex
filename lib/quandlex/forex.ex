@@ -4,6 +4,50 @@ defmodule Quandlex.Forex do
   """
   defdelegate symbols_for(dataset_code, to_currency), to: Quandlex.Forex.Pairs
 
+  @doc ~S"""
+  Returns all available timeseries for given base and quote currency. Timeseries source dataset is automatically selected based on the quote currency.
+
+  ## Examples
+
+      iex> {:ok, %{data: data, type: type, database_code: database_code}} = Quandlex.Forex.all("HKD", "USD")
+      iex> database_code === "FRED" and is_list(data) and type == "Time Series"
+      true
+
+
+  ## Response example
+
+  {:ok,
+  %{
+   collapse: nil,
+   column_index: nil,
+   column_names: ["Date", "Value"],
+   data: [
+     [~D[2018-05-18], 7.8498],
+     [~D[2018-05-17], 7.8496],
+     [~D[2018-05-16], 7.8499],
+     [...],
+     ...
+   ],
+   database_code: "FRED",
+   database_id: 118,
+   dataset_code: "DEXHKUS",
+   description: "Hong Kong Dollars to One U.S. Dollar Not Seasonally Adjusted, Noon buying rates in New York City for cable transfers payable in foreign currencies. ",
+   end_date: "2018-05-18",
+   frequency: "daily",
+   id: 121063,
+   limit: nil,
+   name: "Hong Kong / U.S. Foreign Exchange Rate",
+   newest_available_date: "2018-05-18",
+   oldest_available_date: "1981-01-02",
+   order: nil,
+   premium: false,
+   refreshed_at: "2018-05-27T03:10:46.002Z",
+   start_date: "1981-01-02",
+   transform: nil,
+   type: "Time Series"
+  }}
+  """
+
   def all(from, "USD"), do: get_all_daily(from, "USD", source: "FRED")
   def all(from, "EUR"), do: get_all_daily(from, "EUR", source: "ECB")
   def all(from, "GBP"), do: get_all_daily(from, "GBP", source: "BOE")
