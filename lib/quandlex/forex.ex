@@ -5,13 +5,23 @@ defmodule Quandlex.Forex do
   defdelegate symbols_for(dataset_code, to_currency), to: Quandlex.Forex.Pairs
 
   @doc ~S"""
-  Returns all available timeseries for given base and quote currency. Timeseries source dataset is automatically selected based on the quote currency.
+  Returns all available timeseries for given base and quote currency. Timeseries source dataset is automatically selected based on the quote currency if options [source: "SOURCE"] arg is not passed.
 
   ## Examples
 
-      iex> {:ok, %{data: data, type: type, database_code: database_code}} = Quandlex.Forex.all("HKD", "USD")
+      iex> {:ok, %{data: data, type: type, database_code: database_code}} = Quandlex.Forex.get_rates("HKD", "USD")
       iex> database_code === "FRED" and is_list(data) and type == "Time Series"
       true
+
+      iex> {:ok, %{data: data, type: type, database_code: database_code}} = Quandlex.Forex.get_rates("HKD", "USD", source: "BOE")
+      iex> database_code === "BOE" and is_list(data) and type == "Time Series"
+      true
+
+      iex> {:ok, %{data: data, type: type, database_code: database_code}} = Quandlex.Forex.get_rates("THB", "EUR", source: "ECB")
+      iex> database_code === "ECB" and is_list(data) and type == "Time Series"
+      true
+
+
 
 
   ## Response example
@@ -48,11 +58,11 @@ defmodule Quandlex.Forex do
   }}
   """
 
-  def all(from, "USD"), do: get_all_daily(from, "USD", source: "FRED")
-  def all(from, "EUR"), do: get_all_daily(from, "EUR", source: "ECB")
-  def all(from, "GBP"), do: get_all_daily(from, "GBP", source: "BOE")
+  def get_rates(from, "USD"), do: get_rates(from, "USD", source: "FRED")
+  def get_rates(from, "EUR"), do: get_rates(from, "EUR", source: "ECB")
+  def get_rates(from, "GBP"), do: get_rates(from, "GBP", source: "BOE")
 
-  def get_all_daily(from, to, opts = [source: source]) do
+  def get_rates(from, to, opts = [source: source]) do
     symbol = generate_symbol(from, to, opts)
     Quandlex.Timeseries.get_data(source, symbol)
   end
